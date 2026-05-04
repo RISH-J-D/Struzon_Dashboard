@@ -132,7 +132,7 @@ const Dashboard = () => {
         </div>
         <ImageAutoSlider />
         <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-          These assets are pulled automatically from <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">src/assets/upcoming</code>. 
+          These assets are pulled automatically from <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">src/assets/upcoming</code>.
           To update these, add or remove images from that folder in the main project.
         </p>
       </div>

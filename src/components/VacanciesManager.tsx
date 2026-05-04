@@ -96,11 +96,73 @@ export function VacanciesManager() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Location</label>
-              <input required className="mt-1 block w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} />
+              <select 
+                className="mt-1 block w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+                value={formData.location} 
+                onChange={e => setFormData({...formData, location: e.target.value})}
+              >
+                <option>Remote</option>
+                <option>Onsite</option>
+              </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Experience</label>
-              <input required className="mt-1 block w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} />
+            <div className="sm:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Experience Requirement</label>
+              <div className="flex flex-wrap gap-6 items-center bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg border dark:border-gray-700">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    checked={formData.experience === 'Fresher'} 
+                    onChange={() => setFormData({...formData, experience: 'Fresher'})}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Fresher</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    checked={formData.experience !== 'Fresher'} 
+                    onChange={() => {
+                      if (formData.experience === 'Fresher') {
+                        setFormData({...formData, experience: '1-3 Years'});
+                      }
+                    }}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                  />
+                  <span className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Experienced</span>
+                </label>
+
+                {formData.experience !== 'Fresher' && (
+                  <div className="flex items-center gap-3 animate-in fade-in slide-in-from-left-2 duration-300 pl-6 border-l dark:border-gray-700 ml-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] uppercase font-bold text-gray-400">From</span>
+                      <select 
+                        className="p-2 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
+                        value={formData.experience.split('-')[0]?.replace('Years', '').trim() || '1'}
+                        onChange={(e) => {
+                          const toPart = formData.experience.split('-')[1]?.trim() || '3 Years';
+                          setFormData({...formData, experience: `${e.target.value} - ${toPart}`});
+                        }}
+                      >
+                        {Array.from({length: 12}, (_, i) => i + 1).map(y => <option key={y} value={y}>{y} Years</option>)}
+                      </select>
+                    </div>
+                    <div className="text-gray-400 mt-4 px-1">to</div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] uppercase font-bold text-gray-400">To</span>
+                      <select 
+                        className="p-2 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
+                        value={formData.experience.split('-')[1]?.replace('Years', '').trim() || '3'}
+                        onChange={(e) => {
+                          const fromPart = formData.experience.split('-')[0]?.trim() || '1';
+                          setFormData({...formData, experience: `${fromPart} - ${e.target.value} Years`});
+                        }}
+                      >
+                        {Array.from({length: 12}, (_, i) => i + 1).map(y => <option key={y} value={y}>{y} Years</option>)}
+                      </select>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
