@@ -8,7 +8,8 @@ import { UserManager } from './components/UserManager';
 import { MediaManager } from './components/MediaManager';
 import { ProjectManager } from './components/ProjectManager';
 import { TeamManager } from './components/TeamManager';
-import { LayoutDashboard, Users, FileText, Briefcase, LogOut, ImageIcon, FolderKanban, Shield } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Briefcase, LogOut, ImageIcon, FolderKanban, Shield, Rocket } from 'lucide-react';
+import { ImageAutoSlider } from './components/ImageAutoSlider';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
@@ -22,7 +23,7 @@ import { supabase } from './lib/supabase';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { signOut, user } = useAuth();
-  
+
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       <aside className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
@@ -90,7 +91,7 @@ const Dashboard = () => {
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Admin Dashboard</h2>
       <p className="text-gray-600 dark:text-gray-400">Welcome back. Here is an overview of the current website data.</p>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border dark:border-gray-700">
           <div className="flex items-center gap-3 mb-4">
@@ -122,6 +123,18 @@ const Dashboard = () => {
           <p className="text-gray-600 dark:text-gray-400 mb-4">You are managing {contentItems} dynamic text elements on the website.</p>
           <Link to="/content" className="inline-block text-sm text-blue-600 dark:text-blue-400 hover:underline">Edit Content &rarr;</Link>
         </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow border dark:border-gray-700">
+        <div className="flex items-center gap-3 mb-6">
+          <Rocket className="text-brand-red" size={24} />
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Upcoming Pipeline Assets</h3>
+        </div>
+        <ImageAutoSlider />
+        <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+          These assets are pulled automatically from <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">src/assets/upcoming</code>. 
+          To update these, add or remove images from that folder in the main project.
+        </p>
       </div>
     </div>
   );
