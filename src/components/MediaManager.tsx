@@ -18,7 +18,7 @@ export function MediaManager() {
   const [activeGallery, setActiveGallery] = useState<string>('OfficeGallery');
   const [uploading, setUploading] = useState(false);
 
-  const galleries = ['OfficeGallery'];
+  const galleries = ['OfficeGallery', 'UpcomingProjects'];
 
   const fetchItems = async () => {
     setLoading(true);

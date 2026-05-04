@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
 
-// Use relative path since the alias was removed
-const upcomingImages = Object.values(
-  import.meta.glob('../assets/upcoming/*.{jpg,jpeg,png}', { eager: true, import: 'default' })
-) as string[];
+// Fallback images if database is empty
+const defaultImages = [
+  "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2152&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+];
 
 export const ImageAutoSlider = () => {
-  const [isPaused, setIsPaused] = React.useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [images, setImages] = useState<string[]>(defaultImages);
 
-  const images = upcomingImages.length > 0 ? upcomingImages : [
-    "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2152&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  ];
+  useEffect(() => {
+    const fetchImages = async () => {
+      const { data } = await supabase
+        .from('galleries')
+        .select('image_url')
+        .eq('gallery_name', 'UpcomingProjects')
+        .order('created_at', { ascending: false });
+
+      if (data && data.length > 0) {
+        setImages(data.map(item => item.image_url));
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   const duplicatedImages = [...images, ...images];
 
