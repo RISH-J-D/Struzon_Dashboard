@@ -71,7 +71,7 @@ export const ImageAutoSlider = () => {
           filter: grayscale(0);
         }
       `}</style>
-      
+
       <div className="w-full bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4 border dark:border-gray-700">
         <div className="flex items-center justify-between mb-4 px-2">
           <div className="flex items-center gap-2">
@@ -81,7 +81,7 @@ export const ImageAutoSlider = () => {
           <span className="text-[10px] font-mono text-gray-400 uppercase">{images.length} Assets Active</span>
         </div>
 
-        <div 
+        <div
           className="relative z-10 w-full overflow-hidden"
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
