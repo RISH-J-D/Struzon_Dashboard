@@ -18,6 +18,9 @@ export function MediaManager() {
   const [activeGallery, setActiveGallery] = useState<string>('OfficeGallery');
   const [uploading, setUploading] = useState(false);
 
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState('');
+
   const galleries = ['OfficeGallery', 'UpcomingProjects'];
 
   const fetchItems = async () => {
@@ -30,6 +33,12 @@ export function MediaManager() {
   useEffect(() => {
     fetchItems();
   }, []);
+
+  const handleUpdateTitle = async (id: string) => {
+    await supabase.from('galleries').update({ title: editTitle }).eq('id', id);
+    setEditingId(null);
+    fetchItems();
+  };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -126,14 +135,54 @@ export function MediaManager() {
             {currentItems.map(item => (
               <div key={item.id} className="group relative border dark:border-gray-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-900 aspect-square">
                 <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-2">
-                  <div className="text-white text-xs truncate drop-shadow-md font-medium">{item.title}</div>
-                  <button 
-                    onClick={() => handleDelete(item.id, item.image_url)}
-                    className="self-end bg-red-600 text-white p-1.5 rounded hover:bg-red-700 transition"
-                  >
-                    <Trash2 size={16} />
-                  </button>
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-3">
+                  {editingId === item.id ? (
+                    <div className="space-y-2">
+                      <input 
+                        type="text" 
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                        className="w-full bg-white text-black text-xs p-1 rounded border-none focus:ring-1 focus:ring-brand-red"
+                        autoFocus
+                        onKeyDown={(e) => e.key === 'Enter' && handleUpdateTitle(item.id)}
+                      />
+                      <div className="flex gap-1">
+                        <button 
+                          onClick={() => handleUpdateTitle(item.id)}
+                          className="bg-green-600 text-white text-[10px] px-2 py-1 rounded"
+                        >
+                          Save
+                        </button>
+                        <button 
+                          onClick={() => setEditingId(null)}
+                          className="bg-gray-600 text-white text-[10px] px-2 py-1 rounded"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="text-white text-xs drop-shadow-md font-bold uppercase tracking-wider">
+                        {item.title || 'No Label'}
+                        <button 
+                          onClick={() => {
+                            setEditingId(item.id);
+                            setEditTitle(item.title || '');
+                          }}
+                          className="ml-2 text-white/50 hover:text-white"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                      <button 
+                        onClick={() => handleDelete(item.id, item.image_url)}
+                        className="self-end bg-red-600 text-white p-1.5 rounded hover:bg-red-700 transition"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
