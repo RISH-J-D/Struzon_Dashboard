@@ -2,10 +2,10 @@ import pg from 'pg';
 const { Client } = pg;
 
 const client = new Client({
-  host: 'db.lkagqmvqpvqixgvqchpr.supabase.co',
+  host: 'db.hrsxmnknvxtpdjofynta.supabase.co',
   port: 5432,
   user: 'postgres',
-  password: 'Girish@9042069557',
+  password: 'Struzon@2026#',
   database: 'postgres',
   ssl: { rejectUnauthorized: false }
 });

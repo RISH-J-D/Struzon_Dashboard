@@ -27,7 +27,7 @@ export function UserManager() {
           </div>
 
           <a 
-            href="https://supabase.com/dashboard/project/lkagqmvqpvqixgvqchpr/auth/users" 
+            href="https://supabase.com/dashboard/project/hrsxmnknvxtpdjofynta/auth/users" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"

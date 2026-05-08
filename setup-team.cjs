@@ -2,8 +2,8 @@ const { Client } = require('pg');
 
 const client = new Client({
   host: 'db.hrsxmnknvxtpdjofynta.supabase.co',
-  port: 6543,
-  user: 'postgres.hrsxmnknvxtpdjofynta',
+  port: 5432,
+  user: 'postgres',
   password: 'Struzon@2026#',
   database: 'postgres',
   ssl: { rejectUnauthorized: false }
@@ -40,7 +40,7 @@ async function setup() {
       role: 'CEO',
       email: 'rajadurai@struzon.com',
       linkedin: 'https://www.linkedin.com/in/rajadurai-nallasamy-253543133/',
-      image_url: 'https://lkagqmvqpvqixgvqchpr.supabase.co/storage/v1/object/public/site_media/team/rajadurai.png',
+      image_url: 'https://hrsxmnknvxtpdjofynta.supabase.co/storage/v1/object/public/site_media/team/rajadurai.png',
       bio: [
         'A visionary by nature and passionate about structures, Rajadurai has 15+ years experience in construction industries with a specialization in steel detailing.',
         'His undergraduate degree in engineering is from Anna University and he also has a Master’s degree in Business Management. He is NPCIL-trained in weld techniques and is NDT qualified, which plays a vital and dynamic role in his career, along with his profound knowledge on the steel fabrication and erection process.',
@@ -53,7 +53,7 @@ async function setup() {
       role: 'President',
       email: 'balasaravana@struzon.com',
       linkedin: 'https://www.linkedin.com/in/balasaravana-kumar-t-826248172/',
-      image_url: 'https://lkagqmvqpvqixgvqchpr.supabase.co/storage/v1/object/public/site_media/team/balasaravana.png',
+      image_url: 'https://hrsxmnknvxtpdjofynta.supabase.co/storage/v1/object/public/site_media/team/balasaravana.png',
       bio: [
         'Balasaravana is a recognized expert with more than 15+ years of experience centered around Steel Detailing, Engineering, Business Management, Technology, and Digital Project Delivery, along with being a Mechanical Engineer with an honors B.E. from Anna University.',
         'His vast experience, ability to meet and exceed his steadily increasing responsibilities, and client-centric viewpoint have made him the right person to lead engineering at Struzon and achieve our goals of technical excellence across multiple engineering skills and disciplines.',
@@ -65,7 +65,7 @@ async function setup() {
       role: 'COO',
       email: 'saravanan@struzon.com',
       linkedin: 'https://www.linkedin.com/in/saravanan-soundara-rajan-206a7a67/',
-      image_url: 'https://lkagqmvqpvqixgvqchpr.supabase.co/storage/v1/object/public/site_media/team/saravanan.png',
+      image_url: 'https://hrsxmnknvxtpdjofynta.supabase.co/storage/v1/object/public/site_media/team/saravanan.png',
       bio: [
         'An entrepreneur and emerging business leader with 15+ years of progressive experience in the structural steel detailing industry, Saravanan is the visionary behind the company’s strategies and operations.',
         'Saravanan is excellent at analyzing team strengths and leveraging individual employee traits to reach business goals efficiently.',
@@ -78,7 +78,7 @@ async function setup() {
       role: 'Vice President-Business Development',
       email: 'anand@struzon.com',
       linkedin: 'https://www.linkedin.com/in/anand-m-s-671390154/',
-      image_url: 'https://lkagqmvqpvqixgvqchpr.supabase.co/storage/v1/object/public/site_media/team/anand.png',
+      image_url: 'https://hrsxmnknvxtpdjofynta.supabase.co/storage/v1/object/public/site_media/team/anand.png',
       bio: [
         'Bringing over 16 years of diverse experience from the construction and IT fields, along with excellent socialization skills and charisma, Anand specializes in establishing a personal connection with clients.',
         'He completed his CS graduation in 2004 at Bharathiyar University and then enhanced his career by joining hands with Struzon.',
@@ -91,7 +91,7 @@ async function setup() {
       role: 'Vice President - USA Operations',
       email: 'alan@struzon.com',
       linkedin: 'https://www.linkedin.com/in/alan-bagatourian-pe-29391059/',
-      image_url: 'https://lkagqmvqpvqixgvqchpr.supabase.co/storage/v1/object/public/site_media/team/alan.png',
+      image_url: 'https://hrsxmnknvxtpdjofynta.supabase.co/storage/v1/object/public/site_media/team/alan.png',
       bio: [
         'A California-Licensed Professional Civil Engineer with over 10 years of experience in the field, including owning his Structural Engineering company and co-owning a Commercial Steel Fabrication and Erection company, Alan is the perfect fit to run the US operations of Struzon.',
         'As the VP of US operations, Alan is the initial point of contact with US Clients, discussing client\'s ideas and visions; consolidating them into practical solutions; and bringing them to reality.',
